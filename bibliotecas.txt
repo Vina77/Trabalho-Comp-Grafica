@@ -1,0 +1,4 @@
+adicionar bibliotecas: 
+pip install pandas
+pip install opencv-python
+pip install pytesseract
