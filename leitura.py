@@ -1,6 +1,8 @@
 import cv2 as cv
 import pytesseract as ts
 from local import local
+from tratamento_de_texto import trantamento_texto
+
 def leitura():
     caminho_imagem=local()
     imagem=cv.imread(caminho_imagem)                     #leitura da imagem  
@@ -13,6 +15,6 @@ def leitura():
     ts.pytesseract.tesseract_cmd = (caminho + r'\tesseract.exe')    #tessaract serve para transformar a imagem em texto
     texto=ts.image_to_string(gray_image)
     
-    return texto                                                                
-    
+                                                                   
+    trantamento_texto(texto)
     
