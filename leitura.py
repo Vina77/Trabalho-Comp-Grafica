@@ -1,7 +1,7 @@
 import cv2 as cv
 import pytesseract as ts
 from local import local
-from tratamento_de_texto import trantamento_texto
+from tratamentos import tratamento_texto
 import os
 
 def leitura_de_imagem():
@@ -21,6 +21,7 @@ def leitura_de_imagem():
     caminho=(r'C:\Users\Vivo\AppData\Local\Tesseract-OCR')
     ts.pytesseract.tesseract_cmd = (caminho + r'\tesseract.exe')    #tessaract serve para transformar a imagem em texto
     teste_texto=ts.image_to_string(imagem)
+    
     with open("texto_temp.txt", "w") as arquivo:
         arquivo.write(teste_texto)                  #teste para verificar se ele conseguiu ler alguma coisa
     retorno=os.path.getsize("texto_temp.txt")
@@ -33,8 +34,8 @@ def leitura_de_imagem():
     else:
         os.remove("texto_temp.txt")
         texto=ts.image_to_boxes(imagem_cinza)           #se não uma imagem preto e branco
-        
+       
     
                                                                    
-    trantamento_texto(texto)
+    tratamento_texto(texto)
     
