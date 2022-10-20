@@ -1,4 +1,6 @@
 import os
+import cv2 as cv
+import pytesseract as ts
 
 def tratamento_texto(texto):
     add_numeros=[]                      #lista para separação de letras e numeros 
@@ -17,10 +19,18 @@ def tratamento_texto(texto):
             add_numeros.append(array[0])
         else:
             add_Letras.append(array[0])
-                    
-    os.remove("valores_temp.txt")           #apaga o arquivo
-    print(add_Letras)
+        
+        os.remove("valores_temp.txt")           #apaga o arquivo         
     
-def tratamento_imagem():   
-   pass
+    def tratamento_imagem(texto):
+        pass
+    
+    
+    
+    
+    
+    
+    
+    
+
             

@@ -1,7 +1,7 @@
 import cv2 as cv
 import pytesseract as ts
 from local import local
-from tratamentos import tratamento_texto
+from tratamentos import tratamento_imagem
 import os
 
 def leitura_de_imagem():
@@ -36,6 +36,6 @@ def leitura_de_imagem():
         texto=ts.image_to_boxes(imagem_cinza)           #se não uma imagem preto e branco
        
     
-                                                                   
+    tratamento_imagem(teste_texto)                                                               
     tratamento_texto(texto)
     

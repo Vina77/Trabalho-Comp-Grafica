@@ -1,4 +1,4 @@
-import os 
+import os
 
 def local(): 
     #pasta local onde os arquivos imagens serão salvos.
@@ -34,6 +34,8 @@ def local():
     
     arq=int(input("Digite o numero do arquivo: "))
     for x in list:
-        local_imagem=usuario+"\\"+x[arq]  #caso windowns 
+        local_imagem=usuario+"\\"+x[arq]  #caso windowns
+        
+    
         
     return local_imagem             #retorna o local onde a imagem a ser reconhecida
