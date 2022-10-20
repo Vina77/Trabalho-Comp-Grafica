@@ -8,7 +8,7 @@ arquivo = local()
 #Le a planilha
 df_arquivo = pd.read_excel(arquivo)
 
-#Executa a planilha e exibe um grafica de bara
+#Executa a planilha e exibe um grafica de barra
 df_arquivo.plot(kind='bar')
 plt.show()
 
