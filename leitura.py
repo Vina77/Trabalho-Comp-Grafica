@@ -1,7 +1,7 @@
 import cv2 as cv
 import pytesseract as ts
 from local import local
-from tratamentos import tratamento_imagem
+from tratamentos import tratamento_imagem, tratamento_texto
 import os
 
 def leitura_de_imagem():

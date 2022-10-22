@@ -14,7 +14,7 @@ def tratamento_texto(texto):
         arq=arquivo.read()                                  #leitura do arquivo
     
     for array in arq.splitlines():
-        array=array.split(' ')                          #separa e cria um array com os caracteres encontrados no texto, separação de letras e numeros
+        array=array.split(' ')         #separa e cria um array com os caracteres encontrados no texto, separação de letras e numeros
         if array[0]=='0'or array[0]=='1'or array[0]=='2'or array[0]=='3'or array[0]=='4' or array[0]=='5' or array[0]=='6' or array[0]=='7' or array[0]=='8' or array[0]== '9':
             add_numeros.append(array[0])
         else:
@@ -22,8 +22,8 @@ def tratamento_texto(texto):
         
         os.remove("valores_temp.txt")           #apaga o arquivo         
     
-    def tratamento_imagem(texto):
-        pass
+def tratamento_imagem(texto):
+    pass
     
     
     
