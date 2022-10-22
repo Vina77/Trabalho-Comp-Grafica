@@ -6,7 +6,7 @@ from numpy import append
 def tratamento_texto(texto,textolista):
     add_numeros=[]                      #lista para separação de letras e numeros 
     add_Letras=[" ","{"," ","","}","_","'"]
-    
+
     
     with open("valores_temp.txt", "w") as arquivo:
         arquivo.write(texto)                                #cria um arquivo tmp para tratar
@@ -32,5 +32,6 @@ def tratamento_texto(texto,textolista):
             tratando=tratando.replace(add_Letras[x],"")
             tratado.append(tratando)
    
-    for x in add_Letras:
-        print(x)           
+def tratamento_palavras():
+    pass    
+              

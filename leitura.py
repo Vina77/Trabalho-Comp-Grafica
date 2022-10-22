@@ -8,9 +8,10 @@ def leitura_de_imagem():
     caminho_imagem=local()
     imagem=cv.imread(caminho_imagem)    #leitura da imagem
     altura, largura = imagem.shape[0:2] 
-   
-    if  altura>800 and largura>800:
-        imagem=cv.resize(imagem,(0,0),fx=0.5,fy=0.5)        #verificação do tamanho da imagem para redimensionamento
+    proporcao=float(altura/largura)
+    
+    if  proporcao<1:
+        imagem=cv.resize(imagem,(0,0),fx=1.2,fy=1.2)        #verificação do tamanho da imagem para redimensionamento
                                            
     
     imagem_cinza = cv.cvtColor(imagem, cv.COLOR_BGR2GRAY)  #metodo para transfiormar uma imagem colorida em preto e branco   
