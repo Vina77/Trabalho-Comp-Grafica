@@ -24,7 +24,7 @@ def leitura_de_imagem():
     
     caminho=(r'C:\Users\Vivo\AppData\Local\Tesseract-OCR')
     ts.pytesseract.tesseract_cmd = (caminho + r'\tesseract.exe')    #tessaract serve para transformar a imagem em texto
-    teste_texto=ts.image_to_string(imagem)
+    teste_texto=ts.image_to_string(imagem,lang='por')
     
     with open("texto_temp.txt", "w") as arquivo:
         arquivo.write(teste_texto)                  #teste para verificar se ele conseguiu ler alguma coisa
@@ -33,11 +33,11 @@ def leitura_de_imagem():
     
     if retorno==0:
         os.remove("texto_temp.txt")
-        texto=ts.image_to_boxes(imagem_board)           #caso for zero ele vai tentar verificar pelas bordas
+        texto=ts.image_to_boxes(imagem_board,lang='por')           #caso for zero ele vai tentar verificar pelas bordas
         
     else:
         os.remove("texto_temp.txt")
-        texto=ts.image_to_boxes(imagem_cinza)           #se não uma imagem preto e branco
+        texto=ts.image_to_boxes(imagem_cinza,lang='por')           #se não uma imagem preto e branco
        
                                                                    
     tratamento_texto(texto,teste_texto)
