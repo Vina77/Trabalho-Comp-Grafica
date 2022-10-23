@@ -43,14 +43,20 @@ def tratamento_texto(texto,textolista):
         conv=str(conv0).replace(".",",")
         num_float.append(conv)
     
+
+    
     for x in palavra:
         letra=x
         for y in range(len(num_float)):                             #adicionando a lista numeros com virgula
             if letra==num_float[y] or letra==num_float[y]+"%":
                 list_numero.append(letra)
                 
-    print(palavra)           
-                
+    for x in palavra:
+        p=x
+        if p.isdigit():
+            list_numero.append(p)
+    
+                 
     #palavra_chav(list_texto,list_numero)
                 
     
