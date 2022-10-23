@@ -4,11 +4,11 @@ from local import local
 
 #Chama a classe "local" para achar o nome da planilha
 arquivo = local()
+
 #Le a planilha
 df_arquivo = pd.read_excel(arquivo)
 
 aux = int(input("Escolha 1 para grafico em barra ou 2 para o grafico em pizza: "))
-
 if aux == 1:
     #Define o nome do eixo X
     eixoX = input("Coloque o nome para o eixo X: ")
