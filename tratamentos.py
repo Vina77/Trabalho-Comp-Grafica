@@ -3,7 +3,7 @@ import os
 from palavrachave import palavra_chav
 
 
-def tratamento_texto(texto,textolista):
+def tratamento_texto(texto,textolista,imagem):
     add_numeros=[]                      #lista para separação de letras e numeros 
     add_Letras=[" ","{"," ","","}","_","'"]
 
@@ -29,11 +29,7 @@ def tratamento_texto(texto,textolista):
     list_numero=[]
     palavra=textolista.split()
     
-    for x in palavra:
-        letra=x
-        for y in range(0,len(add_numeros)):                     #separação das palavras
-            letra=letra.replace(add_numeros[y],"")
-            list_texto.append(letra)
+    list_texto.append(palavra)
     
     num_float=[]
     floatnum=0.0
@@ -43,21 +39,32 @@ def tratamento_texto(texto,textolista):
         conv=str(conv0).replace(".",",")
         num_float.append(conv)
     
-
-    
-    for x in palavra:
-        letra=x
-        for y in range(len(num_float)):                             #adicionando a lista numeros com virgula
-            if letra==num_float[y] or letra==num_float[y]+"%":
-                list_numero.append(letra)
-                
     for x in palavra:
         p=x
+        for y in range(len(num_float)):                             #adicionando a lista numeros com virgula
+            if p==num_float[y] or p==num_float[y]+"%":
+                list_numero.append(p)
+                
+    for x in palavra:
+        p=x                                 #captura numeros inteiros
         if p.isdigit():
             list_numero.append(p)
     
-                 
-    #palavra_chav(list_texto,list_numero)
+    list_possible_nums=[]
+    for x in range(10000):
+        conv=str(x)
+        list_possible_nums.append(conv)
+    
+    for x in palavra:
+        p=x
+        for y in range(len(list_possible_nums)):
+            if p==list_possible_nums[y] or p==list_possible_nums[y]+"." or p==list_possible_nums[y]+"%" or p==list_possible_nums[y]+",":
+                list_numero.append(p)
+              
+    
+    
+     
+    palavra_chav(list_texto,list_numero,imagem,texto,add_numeros)
                 
     
         

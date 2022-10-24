@@ -1,6 +1,7 @@
 import cv2 as cv
 import pytesseract as ts
 from local import local
+
 from tratamentos import  tratamento_texto
 import os
 
@@ -17,9 +18,6 @@ def leitura_de_imagem():
     imagem_cinza = cv.cvtColor(imagem, cv.COLOR_BGR2GRAY)  #metodo para transfiormar uma imagem colorida em preto e branco   
     
     imagem_board=cv.Laplacian(imagem_cinza,cv.CV_8U)       #metodo de detecção de bordas
-    
-    cv.imshow("analise",imagem)
-    cv.waitKey(0)
     
     
     caminho=(r'C:\Users\Vivo\AppData\Local\Tesseract-OCR')
@@ -40,5 +38,5 @@ def leitura_de_imagem():
         texto=ts.image_to_boxes(imagem_cinza,lang='por')           #se não uma imagem preto e branco
        
                                                                    
-    tratamento_texto(texto,teste_texto)
+    tratamento_texto(texto,teste_texto,imagem)
     
