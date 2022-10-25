@@ -24,12 +24,13 @@ def local():
     
     arquivo=os.listdir(usuario)
     list.clear()
-    print (list)
+    print("\n")
+    print("Nome do arquivo: ")
     list.append(arquivo)
     
     for x in list:
         cont=len(x)
-        for i in range(cont):              #lista de arquivos e diretorios na pasta downloadsé
+        for i in range(cont):              #lista de arquivos e diretorios na pasta downloads
             print(i,"-",x[i])
     
     arq=int(input("Digite o numero do arquivo: "))
