@@ -1,5 +1,7 @@
 import pandas as pd
 import cv2 as cv
+import re
+from grafico import grafico 
 
 def palavra_chav(texto,numeros,imagem,bouding_boxes,nums):
     imH, imW,_=imagem.shape
@@ -49,11 +51,13 @@ def palavra_chav(texto,numeros,imagem,bouding_boxes,nums):
         
         tabela['palavra']=linha
         tabela['correspondentes']=0
+        tabela["convertido"]=0
         
         posicao_do_valor=[]
         
         for posi in range(0,len(posicao_palavra_texto)): 
-            tam=len(posicao_numero_correspondente)-1
+            tam=len(posicao_numero_correspondente)
+            tam=tam-1
             aux=posicao_numero_correspondente[tam]
             for y in range(0,len(posicao_numero_correspondente)):
                 comp=posicao_numero_correspondente[y]                   #vai verificar o numero mais perto da palavra digitada
@@ -71,23 +75,115 @@ def palavra_chav(texto,numeros,imagem,bouding_boxes,nums):
                 for x in posicao_do_valor:                      #pega os numeros mais perto das palavras chaves e adiciona na lista
                     if x==nums:
                         numero_table.append(numero[nums])     
-                            
+        
+        
+        #pegar numeros em numero_table e transoformar em numeros
+        
+        
+        tipos_numero=["1","2","3","4","5","6","7","8","9","0"] 
+        cont=0 
+        chars=[]                  
+        #cria a planilha com as palavras e seus numeros correspondentes
         for x in range(len(linha)):
-            for y in range(len(numero_table)):          #cria a planilha com as palavras e seus numeros correspondentes                                                 
+            for y in range(len(numero_table)):
+                cont=0
+                troca=numero_table[y]            #for para trocar para numeros reais
+                for z in range(len(troca)):
+                    tam=len(troca)-1
+                    tam2=len(troca)
+                    if troca[z]=="," or troca[z]==".":                  #verifica se tem . ou ,
+                        cont=0                                  
+                        for num in tipos_numero:                #caso float
+                            if troca[tam]==num:
+                                troca=troca.replace(",",".")
+                                novo_numero=float(troca)
+                                numero_table[y]=novo_numero
+                            elif troca[tam]=="," or troca[tam]==".":
+                                novo_numero=re.sub('[.,!]', '',troca)
+                                novo_numero=int(novo_numero)
+                                numero_table[y]=novo_numero
+                            elif troca[tam]=="%" and troca[tam-1]==num:
+                                novo_numero=re.sub('[%]', '',troca) 
+                                novo_numero=novo_numero.replace(",",".")      
+                                novo_numero=float(novo_numero)
+                                novo_numero=novo_numero/100
+                                numero_table[y]=novo_numero
+                    else:                               #caso inteiro          
+                        for num in tipos_numero:
+                            if num==troca[z]:
+                                cont+=1
+                                if cont==tam2:
+                                    novo_numero=int(troca)
+                                    numero_table[y]=novo_numero
+                                    cont=0   
+    
+    
+    
+                                                     
+
+        for x in range(len(linha)):
+            for y in range(len(numero_table)):         
+                novo_numero=int(numero_table[y])
                 tabela.iloc[y,1]=numero_table[y]
-        
-                  
-        
+                tabela.iloc[y,2]=novo_numero
                 
         tabela.to_excel(r'palavras_chave.xlsx')
-        
+        grafico()
         return(tabela)
                 
     elif quantidade==0:
-            tabela['numeros']=numeros                       #se o usuario optar por não usar palavras chaves cria uma planilha só com dados numericos
-            tabela.to_excel(r'palavras_chave.xlsx')
+        tipos_numero=["1","2","3","4","5","6","7","8","9","0"] 
+        cont=0 
+        
+        for y in range(len(numeros)):
+            cont=0
+            troca=numeros[y]
+            tam=len(numeros[y])
+            tam=tam-1
+            tam2=len(numeros[y])
+            for z in range(len(troca)):                         #verifica se tem . ou ,
+                if troca[z]=="," or troca[z]==".":
+                    cont=0          
+                    for num in tipos_numero:                         #caso float
+                        if troca[tam]==num:
+                            novo_numero=troca
+                            novo_numero=novo_numero.replace(",",".")
+                            novo_numero=float(novo_numero)
+                            numeros[y]=novo_numero
+                        elif troca[tam]=="," or troca[tam]==".":
+                            novo_numero=re.sub('[.,!]', '',troca)
+                            novo_numero=int(novo_numero)
+                            numeros[y]=novo_numero
+                        elif troca[tam]=="%" and troca[tam-1]==num:
+                            novo_numero=re.sub('[%]', '',troca) 
+                            novo_numero=novo_numero.replace(",",".")      
+                            novo_numero=float(novo_numero)
+                            novo_numero=novo_numero/100
+                            numeros[y]=novo_numero
+                else:          
+                    for num in tipos_numero:
+                        if num==troca[z]:
+                            cont+=1
+                            if cont==tam2:
+                                novo_numero=troca
+                                novo_numero=int(novo_numero)
+                                numeros[y]=novo_numero
+                                cont=0
+        
 
-            return(tabela)
+        tabela['Dados']="dados"
+        tabela['numeros']=numeros   #se o usuario optar por não usar palavras chaves cria uma planilha só com dados numericos
+        tabela["correspondentes"]=0
+        
+        for x in  range(len(numeros)):
+            novo_numero=int(numeros[x])
+            tabela.iloc[x,2]=novo_numero
+        
+        tabela.to_excel(r'palavras_chave.xlsx')
+        
+        grafico()
+        return(tabela)
+        
     
     
     

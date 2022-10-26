@@ -8,7 +8,7 @@ import os
 def leitura_de_imagem():
     caminho_imagem=local()
     imagem=cv.imread(caminho_imagem)    #leitura da imagem
-    altura, largura = imagem.shape[0:2] 
+    altura, largura = imagem.shape[:2] 
     proporcao=float(altura/largura)
     
     if  proporcao<1:

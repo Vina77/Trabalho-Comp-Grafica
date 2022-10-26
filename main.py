@@ -8,5 +8,6 @@ def main():
     
     leitura_de_imagem()
     
+    
 main()
     
