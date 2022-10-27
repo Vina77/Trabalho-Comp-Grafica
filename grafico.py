@@ -39,3 +39,11 @@ def grafico():
         plt.show()
     else:
         print("Opção invalida")
+
+def verifica():
+    #Pergunta se o usuario gostario de construir uma grafico
+    aux = input("Coloque 1 para construir o grafico ou qualquer outra tecla para finalizar o programa")
+    if aux == 1:
+        grafico()
+    else:
+        print("Fim do programa")        
