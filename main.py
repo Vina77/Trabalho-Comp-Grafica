@@ -1,5 +1,6 @@
 from leitura import leitura_de_imagem
 from interface import interface
+from grafico import grafico
 
 #Prototipo de programa que le uma imagem texto e pega seus dados para criar uma planilha
 def main():
@@ -8,6 +9,8 @@ def main():
     
     leitura_de_imagem()
     
+    verifica()
     
+  
 main()
     
